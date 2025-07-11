@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Index</title>
+    <link rel="stylesheet" href="mergedStyles.css">
+	    <script src="https://cdn.jsdelivr.net/gh/AhmedNooor/halkaBox.js/dist/halkaBox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AhmedNooor/halkaBox.js/dist/halkaBox.min.css">
+</head>
+
+
+<body>
+
+    <main>
+        <h1>
+            Michael's Portfolio
+        </h1>
+
+        <nav>
+            <a href="index.html">Index</a>
+            <a href="person.html">The Person</a>
+            <a href="resume.html">Resume</a>
+            <a href="projects.html">Projects</a>
+        </nav>
+
+        <hr>
+
+        <h2 style="text-align:center;"><strong>Robot Final 3D Modeling</strong></h2>
+
+        <p style="text-align:center;">
+            This project was meant to be the final project of my 3D modeling course. The goal was to create a 30 second to one minute animation with the skills we have learned over the course of the semester.
+        </p>
+
+        
+
+        <!-- Ensure all images are inside <a> tags -->
+			
+            <div class="timeline">
+                <div class="timeline-item">
+                    <a class="hb-single" href="https://imm130.com/rasimom1/images/model%20render.jpg"  data-title="First look at the new scene">
+                        <img src="https://imm130.com/rasimom1/images/model%20render.jpg" alt="firstRender">
+                    </a>
+                    <div class="timeline-content">
+                        <h3>Models Brought Together</h3>
+                        <p>The layout for the Scene was brought together before texturing was done.</p>
+                    </div>
+                </div>
+    
+                <div class="timeline-item">
+                    <a class="hb-single" href="https://imm130.com/rasimom1/images/texture%20render.jpg" data-title="To dark">
+                        <img src="https://imm130.com/rasimom1/images/texture%20render.jpg" alt="ShipModel">
+                    </a>
+                    <div class="timeline-content">
+                        <h3>First Lighting Render</h3>
+                        <p>As the scene is clearly to dark some future adjustments needed to be made. This is also the first look at the textures put in place to be used.</p>
+                    </div>
+                </div>
+    
+                <div class="timeline-item">
+                    <a class="hb-single" href="https://imm130.com/rasimom1/images/lightingrender3.jpg" data-title="Much better lighting">
+                        <img src="https://imm130.com/rasimom1/images/lightingrender3.jpg" alt="Before Photo">
+                    </a>
+                    <div class="timeline-content">
+                        <h3>Better lighting</h3>
+                        <p>Lighting was adjusted, and new render shows it looks way better. Small changes were done and the skybox was soon to be added.</p>
+                    </div>
+                </div>
+    
+                <div class="timeline-item">
+                    <a class="hb-single" href="https://imm130.com/rasimom1/images/lightingrender2.jpg" data-title="Final Render">
+                        <img src="https://imm130.com/rasimom1/images/lightingrender2.jpg" alt="Final Render">
+                    </a>
+                    <div class="timeline-content">
+                        <h3>Robot Awakens</h3>
+                        <p>This image shows a view of the whole scene brought together with the robot emerging from the grave, as part of the small story within the scene.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <a class="hb-single" href="https://imm130.com/rasimom1/images/finalrender0483.png" data-title="Final Render">
+                        <img src="https://imm130.com/rasimom1/images/finalrender0483.png" alt="Final Render">
+                    </a>
+                    <div class="timeline-content">
+                        <h3>Video Of Project</h3>
+                        <p>This will be a video to watch of the project once I add it.</p>
+                    </div>
+                </div>
+
+                <!-- <div class="timeline-item">
+                    <a class="hb-single" href="https://imm130.com/rasimom1/images/13%20-%20finalrender%201.mp4" data-title="Final Render">
+                        <video src="https://imm130.com/rasimom1/images/13%20-%20finalrender%201.mp4" alt="Final Render">
+                    </a>
+                    <div class="timeline-content">
+                        <h3>title</h3>
+                        <p>text</p>
+                    </div>
+                </div> -->
+            </div>
+    
+        </main>
+    
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Check if halkaBox.js is loaded
+                if (typeof halkaBox !== "undefined") {
+                    // Run halkaBox on all linked images
+                    halkaBox.run("a[href$='.jpg'], a[href$='.png']", {
+                        hideButtons: false,
+                        animation: "slide",
+                        theme: "light",
+                    });
+    
+                    // Close lightbox when clicking outside the image
+                    document.addEventListener("click", function (event) {
+                        let lightbox = document.querySelector(".halkaBox-container");
+                        let lightboxImage = document.querySelector(".halkaBox img");
+    
+                        // If the lightbox exists and the click is outside the image, close it
+                        if (lightbox && !lightboxImage.contains(event.target)) {
+                            halkaBox.close(); // Manually close the lightbox
+                        }
+                    });
+    
+                    // Close lightbox with Escape key
+                    document.addEventListener("keydown", function (event) {
+                        if (event.key === "Escape") {
+                            halkaBox.close(); // Ensure the lightbox is properly removed
+                        }
+                    });
+                } else {
+                    console.error("halkaBox.js failed to load!");
+                }
+            });
+        </script>
+        
+         <script>
+            window.onload = function () {
+                halkaBox.run("gallery1");
+                halkaBox.run("gallery2", {
+                    animation: "fade",
+                    theme: "dark",
+                    hideButtons: false,
+                    preload: 0
+                });
+                halkaBox.run("hb-single");
+                halkaBox.run("singleImage1", {
+                    theme: "dark"
+                });
+                halkaBox.run("singleImage2", {
+                    theme: "dark"
+                });
+            };
+        </script>
+    
+    <script>
+        fetch('footer.html')
+            .then(res => res.text())
+            .then(data => {
+                document.body.insertAdjacentHTML('beforeend', data);
+            });
+    </script>
+
+    </body>
+    
+    </html>

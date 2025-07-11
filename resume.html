@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Resume Page</title>
+    <link rel="stylesheet" href="mergedStyles.css">
+</head>
+
+<body>
+
+    <main>
+
+        <h1>
+            Michael's Portfolio
+        </h1>
+
+        <nav>
+            <a href="index.html">Home Page</a>
+            <a href="person.html">The Person</a>
+            <span>Resume</span>
+            <a href="projects.html">Projects</a>
+        </nav>
+
+        <hr>
+
+        <h2>Resume</h2>
+
+        <p>Michael's resume is currently below this passage. He has included this in his portfolio website in case there
+            was any curiousity in a quick peek into his work life without any visual noise.</p>
+
+        <img src="https://imm130.com/rasimom1/images/MichaelsResume.jpg" alt="resume" >
+           
+        
+    </main>
+
+
+    <script>
+        fetch('footer.html')
+            .then(res => res.text())
+            .then(data => {
+                document.body.insertAdjacentHTML('beforeend', data);
+            });
+    </script>
+
+</body>
+
+
+</html>

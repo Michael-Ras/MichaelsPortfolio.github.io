@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Projects Page</title>
+    <link rel="stylesheet" href="mergedStyles.css">
+</head>
+
+<body>
+
+    <main>
+        <h1>Michael's Portfolio</h1>
+
+        <nav>
+            <a href="index.html">Home Page</a>
+            <a href="person.html">The Person</a>
+            <a href="resume.html">Resume</a>
+            Projects
+        </nav>
+        
+        <hr>
+
+        <h2>Project Page</h2>
+
+        <h4>Click an Image to learn more!</h4>
+       
+    <div class="image-container">
+        <a href="project1.html">
+            <img src="https://imm130.com/rasimom1/images/mikerasirocketfilm.0058.jpg" alt="Project1">
+        </a>
+        <a href="project2.html">
+            <img src="https://imm130.com/rasimom1/images/villagelightingrender2.jpg" alt="Project 2">
+        </a>
+        <a href="project3.html">
+            <img src="https://imm130.com/rasimom1/images/lightingrender3.jpg" alt="Image 3">
+        </a>
+    </div>
+
+    <!-- <h2>Future Projects</h2>
+    <div class="image-container">
+        <a href="project4.html">
+            <img src="https://placehold.co/600x400" alt="Project4">
+        </a>
+        <a href="project5.html">
+            <img src="https://placehold.co/600x400" alt="Project 5">
+        </a>
+        
+        <a href="project6.html">
+            <img src="https://placehold.co/600x400" alt="Image 6">
+        </a>
+    </div> -->
+        <!-- Subpages that lead to certain projects to some my progression in work. In other words, for those looking to see my projects in a more detailed light, this page would be for them. -->
+
+    </main>
+
+    <script>
+        fetch('footer.html')
+            .then(res => res.text())
+            .then(data => {
+                document.body.insertAdjacentHTML('beforeend', data);
+            });
+    </script>
+    
+</body>
+
+
+
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio About Me</title>
+    <link rel="stylesheet" href="mergedStyles.css">
+</head>
+
+<body>
+    <main>
+
+        <h1>
+            Michael's Portfolio
+        </h1>
+
+        <nav>
+            <a href="index.html">Home Page</a>
+            <span>The Person</span>
+            <a href="resume.html">Resume</a>
+            <a href="projects.html">Projects</a>
+        </nav>
+
+        <hr>
+
+        <h2>About me</h2>
+
+        
+
+        <div style="text-align:center;">
+            Michael Rasimowicz is a former RVCC graduate in an associate of science
+            that specilized in game art. He is currently an Interactive Multimedia major at TCNJ. Michael enjoys working
+            in
+            groups with other creative minds. Michael also enjoys 3D modeling in Autodesk's Maya.
+        </div>
+
+
+        <div class="wrap">
+            <img src="https://imm130.com/rasimom1/images/black_and_white_me.jpg" alt="selfie" width="auto" height="auto">
+        </div>
+
+        <div class="underPhoto">
+         <p>
+                Once out of TCNJ Michael is hoping to find work in the 3D  modeling field, so if you have any intrest in talking more about what he would like to do, you can contact with him below.
+          </p>
+
+        </div>
+
+    </main>
+
+    <script>
+        fetch('footer.html')
+            .then(res => res.text())
+            .then(data => {
+                document.body.insertAdjacentHTML('beforeend', data);
+            });
+    </script>
+
+</body>
+
+
+</html>

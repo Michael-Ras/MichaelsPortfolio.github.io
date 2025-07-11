@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Index</title>
+    <link rel="stylesheet" href="mergedStyles.css">
+	    <script src="https://cdn.jsdelivr.net/gh/AhmedNooor/halkaBox.js/dist/halkaBox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AhmedNooor/halkaBox.js/dist/halkaBox.min.css">
+</head>
+
+<body>
+
+    <main>
+        <h1>
+            Michael's Portfolio
+        </h1>
+
+        <nav>
+            <a href="index.html">Index</a>
+            <a href="person.html">The Person</a>
+            <a href="resume.html">Resume</a>
+            <a href="projects.html">Projects</a>
+        </nav>
+
+        <hr>
+
+        <h2 style="text-align:center;"><strong>City or Village Project</strong></h2>
+
+        <p style="text-align:center;">
+            This project was the second major project from the 3D modeling course I participated in. Our goal was to reinforce skills learned. We were tasked with modeling a city or a village and use lighting to make the scene look better.
+        </p>
+
+        <!-- Ensure all images are inside <a> tags -->
+			
+            <div class="timeline">
+                <div class="timeline-item">
+                    <a class="hb-single" href="https://imm130.com/rasimom1/images/houseRender.jpg"  data-title="Village House">
+                        <img src="https://imm130.com/rasimom1/images/houseRender.jpg" alt="firstRender">
+                    </a>
+                    <div class="timeline-content">
+                        <h3>First Scene Asset</h3>
+                        <p>This render is showing a basic idea of what I want the rest of the scene to feel like.</p>
+                    </div>
+                </div>
+    
+                <div class="timeline-item">
+                    <a class="hb-single" href="https://imm130.com/rasimom1/images/render.png" data-title="Laying out the Scene">
+                        <img src="https://imm130.com/rasimom1/images/render.png" alt="ShipModel">
+                    </a>
+                    <div class="timeline-content">
+                        <h3>Bringing The Scene Together</h3>
+                        <p>A simple 'wall' was added and the first idteration of a pathway through the village was also added.</p>
+                    </div>
+                </div>
+    
+                <div class="timeline-item">
+                    <a class="hb-single" href="https://imm130.com/rasimom1/images/render1.jpg" data-title="New view of the scene">
+                        <img src="https://imm130.com/rasimom1/images/render1.jpg" alt="Before Photo">
+                    </a>
+                    <div class="timeline-content">
+                        <h3>Another View</h3>
+                        <p>A different angle provides the ability to see what the stone wall looks like from this side view on the scene.</p>
+                    </div>
+                </div>
+    
+                <div class="timeline-item">
+                    <a class="hb-single" href="https://imm130.com/rasimom1/images/render2.png" data-title="Realigning the pathway">
+                        <img src="https://imm130.com/rasimom1/images/render2.png" alt="Final Render">
+                    </a>
+                    <div class="timeline-content">
+                        <h3>New View</h3>
+                        <p>Another veiw shows how the pathway is hovering and needs to be fixed. This view also shows what it could look like to be standing on the bridge.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <a class="hb-single" href="https://imm130.com/rasimom1/images/villagelightingrender.jpg" data-title="Texture close up">
+                        <img src="https://imm130.com/rasimom1/images/villagelightingrender.jpg" alt="Final Render">
+                    </a>
+                    <div class="timeline-content">
+                        <h3>New Textures</h3>
+                        <p>To remove the flatness of the ground, some grass 3D textures were added. We can also see here a new building type to add some variation in the scene.</p>
+                    </div>
+                </div>
+
+
+                <div class="timeline-item">
+                    <a class="hb-single" href="https://imm130.com/rasimom1/images/villagelightingrender2.jpg" data-title="A view of the scene as if we were walking it">
+                        <img src="https://imm130.com/rasimom1/images/villagelightingrender2.jpg" alt="Final Render">
+                    </a>
+                    <div class="timeline-content">
+                        <h3>Church</h3>
+                        <p>A closer view of the bridge textures and also a sneak peak at the church that was added into the scene.</p>
+                    </div>
+                </div>
+
+
+                <div class="timeline-item">
+                    <a class="hb-single" href="https://imm130.com/rasimom1/images/villagelightingrender3.jpg" data-title="Final Render">
+                        <img src="https://imm130.com/rasimom1/images/villagelightingrender3.jpg" alt="Final Render">
+                    </a>
+                    <div class="timeline-content">
+                        <h3>A Final Render</h3>
+                        <p>Wrapping up the project consisted of adjusting the lighting and skybox to have a moody feeling.</p>
+                    </div>
+                </div>
+            </div>
+    
+        </main>
+    
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Check if halkaBox.js is loaded
+                if (typeof halkaBox !== "undefined") {
+                    // Run halkaBox on all linked images
+                    halkaBox.run("a[href$='.jpg'], a[href$='.png']", {
+                        hideButtons: false,
+                        animation: "slide",
+                        theme: "light",
+                    });
+    
+                    // Close lightbox when clicking outside the image
+                    document.addEventListener("click", function (event) {
+                        let lightbox = document.querySelector(".halkaBox-container");
+                        let lightboxImage = document.querySelector(".halkaBox img");
+    
+                        // If the lightbox exists and the click is outside the image, close it
+                        if (lightbox && !lightboxImage.contains(event.target)) {
+                            halkaBox.close(); // Manually close the lightbox
+                        }
+                    });
+    
+                    // Close lightbox with Escape key
+                    document.addEventListener("keydown", function (event) {
+                        if (event.key === "Escape") {
+                            halkaBox.close(); // Ensure the lightbox is properly removed
+                        }
+                    });
+                } else {
+                    console.error("halkaBox.js failed to load!");
+                }
+            });
+        </script>
+        
+         <script>
+            window.onload = function () {
+                halkaBox.run("gallery1");
+                halkaBox.run("gallery2", {
+                    animation: "fade",
+                    theme: "dark",
+                    hideButtons: false,
+                    preload: 0
+                });
+                halkaBox.run("hb-single");
+                halkaBox.run("singleImage1", {
+                    theme: "dark"
+                });
+                halkaBox.run("singleImage2", {
+                    theme: "dark"
+                });
+            };
+        </script>
+    <script>
+        fetch('footer.html')
+            .then(res => res.text())
+            .then(data => {
+                document.body.insertAdjacentHTML('beforeend', data);
+            });
+    </script>
+    </body>
+    
+    </html>

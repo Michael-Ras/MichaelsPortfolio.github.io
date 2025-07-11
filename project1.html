@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Index</title>
+    
+    <link rel="stylesheet" href="mergedStyles.css">
+	    <script src="https://cdn.jsdelivr.net/gh/AhmedNooor/halkaBox.js/dist/halkaBox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AhmedNooor/halkaBox.js/dist/halkaBox.min.css">
+
+    <!-- <script src="halkaBox.min.css"></script>
+    <link rel="stylesheet" href="halkaBox.min.js"> -->
+
+</head>
+
+<body>
+
+    <main>
+        <h1>Michael's Portfolio</h1>
+
+        <nav>
+            <a href="index.html">Index</a>
+            <a href="person.html">The Person</a>
+            <a href="resume.html">Resume</a>
+            <a href="projects.html">Projects</a>
+        </nav>
+
+        <hr>
+
+        <h2 style="text-align:center;"><strong>Spaceship Project</strong></h2>
+
+        <p style="text-align:center;">
+            This project was meant to be the first project of my 3D modeling course. The goal was to learn how to use Maya and just to model out a scene that showed a spaceship flying through space.
+        </p>
+
+        <!-- Ensure all images are inside <a> tags -->
+			
+        <div class="timeline">
+            <div class="timeline-item">
+                <a class="hb-single" href="https://imm130.com/rasimom1/images/mikerasirocketfilm.0120.jpg"  data-title="First look at the new scene">
+                    <img src="https://imm130.com/rasimom1/images/mikerasirocketfilm.0120.jpg" alt="firstRender">
+                </a>
+                <div class="timeline-content">
+                    <h3>First Render</h3>
+                    <p>This render shows only the modeling that went into the scene before any texturing.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <a class="hb-single" href="https://imm130.com/rasimom1/images/shipOnly.jpg" data-title="Rocket!">
+                    <img src="https://imm130.com/rasimom1/images/shipOnly.jpg" alt="ShipModel">
+                </a>
+                <div class="timeline-content">
+                    <h3>Ship Model</h3>
+                    <p>Model of the spaceship with texturing. At this point there was also some early lighting being used</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <a class="hb-single" href="https://imm130.com/rasimom1/images/shipimage2.jpg" data-title="Lighting test">
+                    <img src="https://imm130.com/rasimom1/images/shipimage2.jpg" alt="Before Photo">
+                </a>
+                <div class="timeline-content">
+                    <h3>Lighting Render Testing</h3>
+                    <p>At this point the scene was being given final touches such as new skyboxes, different lighting, and changing some of the textures on the planet.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <a class="hb-single" href="https://imm130.com/rasimom1/images/mikerasirocketfilm.0058.jpg" data-title="Final Render">
+                    <img src="https://imm130.com/rasimom1/images/mikerasirocketfilm.0058.jpg" alt="Final Render">
+                </a>
+                <div class="timeline-content">
+                    <h3>Final Render</h3>
+                    <p>A new sky box was added as the previous one was way too dark. When lighting was added to fix this issue the whole scene became over-saturated, and as such, a new skybox was added to help balance out the planet textures and lighting.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Check if halkaBox.js is loaded
+            if (typeof halkaBox !== "undefined") {
+                // Run halkaBox on all linked images
+                halkaBox.run("a[href$='.jpg'], a[href$='.png']", {
+                    hideButtons: false,
+                    animation: "slide",
+                    theme: "light",
+                });
+
+                // Close lightbox when clicking outside the image
+                document.addEventListener("click", function (event) {
+                    let lightbox = document.querySelector(".halkaBox-container");
+                    let lightboxImage = document.querySelector(".halkaBox img");
+
+                    // If the lightbox exists and the click is outside the image, close it
+                    if (lightbox && !lightboxImage.contains(event.target)) {
+                        halkaBox.close(); // Manually close the lightbox
+                    }
+                });
+
+                // Close lightbox with Escape key
+                document.addEventListener("keydown", function (event) {
+                    if (event.key === "Escape") {
+                        halkaBox.close(); // Ensure the lightbox is properly removed
+                    }
+                });
+            } else {
+                console.error("halkaBox.js failed to load!");
+            }
+        });
+    </script>
+	
+	 <script>
+        window.onload = function () {
+            halkaBox.run("gallery1");
+            halkaBox.run("gallery2", {
+                animation: "fade",
+                theme: "dark",
+                hideButtons: false,
+                preload: 0
+            });
+            halkaBox.run("hb-single");
+            halkaBox.run("singleImage1", {
+                theme: "dark"
+            });
+            halkaBox.run("singleImage2", {
+                theme: "dark"
+            });
+        };
+    </script>
+
+<script>
+    fetch('footer.html')
+        .then(res => res.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('beforeend', data);
+        });
+</script>
+</body>
+
+</html>
