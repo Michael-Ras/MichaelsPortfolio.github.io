@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Index</title>
+    
+    <link rel="stylesheet" href="mergedStyles.css">
+	    <script src="https://cdn.jsdelivr.net/gh/AhmedNooor/halkaBox.js/dist/halkaBox.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AhmedNooor/halkaBox.js/dist/halkaBox.min.css">
+
+    <!-- <script src="halkaBox.min.css"></script>
+    <link rel="stylesheet" href="halkaBox.min.js"> -->
+
+</head>
+
+<body>
+
+    <main>
+        <h1>Michael's Portfolio</h1>
+
+        <nav>
+            <a href="index.html">Index</a>
+            <a href="person.html">The Person</a>
+            <a href="resume.html">Resume</a>
+            <a href="projects.html">Projects</a>
+        </nav>
+
+        <hr>
+
+        <h2 style="text-align:center;"><strong>Love Letter to Winter</strong></h2>
+
+        <p style="text-align:center;">
+            This project demonstrates my understanding of correction, masking, tracking, and effects in After Effects. I took an idea from concept through pre-production, shot my own background plate, integrated green screen elements, and added effects to bring my vision to life.
+        </p>
+
+        <!-- Ensure all images are inside <a> tags -->
+		<div>	
+            <div class="timeline-item">
+                <a href="videos/mRasimowicz_midterm.mp4" data-video>
+                    <img src="images/midtermPoster.jpg" alt="Video poster">
+                </a>
+                <div class="timeline-content">
+                    <h3>Final Render</h3>
+                    <p>There is some poor quality filmed used. However this was overlooked as I wanted to focus on the storytelling, the overall impact of the transitions, and the effects used for this project. </p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Check if halkaBox.js is loaded
+            if (typeof halkaBox !== "undefined") {
+                // Run halkaBox on all linked images
+                halkaBox.run("a[href$='.jpg'], a[href$='.png']", {
+                    hideButtons: false,
+                    animation: "slide",
+                    theme: "light",
+                });
+
+                // Close lightbox when clicking outside the image
+                document.addEventListener("click", function (event) {
+                    let lightbox = document.querySelector(".halkaBox-container");
+                    let lightboxImage = document.querySelector(".halkaBox img");
+
+                    // If the lightbox exists and the click is outside the image, close it
+                    if (lightbox && !lightboxImage.contains(event.target)) {
+                        halkaBox.close(); // Manually close the lightbox
+                    }
+                });
+
+                // Close lightbox with Escape key
+                document.addEventListener("keydown", function (event) {
+                    if (event.key === "Escape") {
+                        halkaBox.close(); // Ensure the lightbox is properly removed
+                    }
+                });
+            } else {
+                console.error("halkaBox.js failed to load!");
+            }
+        });
+    </script>
+	
+	 <script>
+        window.onload = function () {
+            halkaBox.run("gallery1");
+            halkaBox.run("gallery2", {
+                animation: "fade",
+                theme: "dark",
+                hideButtons: false,
+                preload: 0
+            });
+            halkaBox.run("hb-single");
+            halkaBox.run("singleImage1", {
+                theme: "dark"
+            });
+            halkaBox.run("singleImage2", {
+                theme: "dark"
+            });
+        };
+    </script>
+
+<script>
+    fetch('footer.html')
+        .then(res => res.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('beforeend', data);
+        });
+</script>
+<script src="videoOverlay.js"></script>
+</body>
+
+</html>

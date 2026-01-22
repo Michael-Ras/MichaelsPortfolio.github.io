@@ -249,3 +249,10 @@ footer input[type="submit"] {
 footer input[type="submit"]:hover {
     background-color: #555ab5; /* Even lighter on hover */
 }
+
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Optional: Adjusts spacing between headers */
+    align-items: center; /* Optional: Vertically centers headers */
+    width: 100%; /* Optional: Ensures container takes full width */
+  }
