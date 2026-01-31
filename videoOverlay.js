@@ -4,7 +4,7 @@
   if(!document.getElementById('hb-video-overlay-styles')){
     var style = document.createElement('style');
     style.id = 'hb-video-overlay-styles';
-    style.innerHTML = '\n.hb-video-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);z-index:99999;padding:20px;box-sizing:border-box;}\n.hb-video-container{max-width:1100px;width:100%;max-height:80vh;}\n.hb-video-container video{width:100%;height:100%;max-height:80vh;object-fit:contain;background:#000;border-radius:6px;}\n.hb-video-close{position:fixed;top:18px;right:18px;z-index:100000;background:rgba(0,0,0,0.45);color:#fff;border:none;font-size:22px;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;}\n@media (max-width:600px){.hb-video-container{max-width:100%;max-height:95vh;padding:6px}.hb-video-close{top:10px;right:10px;font-size:18px;width:36px;height:36px}}\n';
+    style.innerHTML = '\n.hb-video-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);z-index:99999;padding:20px;box-sizing:border-box;}\n.hb-video-container{max-width:1100px;width:100%;max-height:80vh;}\n.hb-video-container video{width:100%;height:100%;max-height:80vh;object-fit:contain;background:#000;border-radius:6px;}\n.hb-video-close{position:fixed;top:18px;right:18px;z-index:100000;background:rgba(0,0,0,0.45);color:#fff;border:none;font-size:22px;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;}\n.hb-video-unmute{position:fixed;top:18px;right:68px;z-index:100000;background:rgba(0,0,0,0.45);color:#fff;border:none;font-size:18px;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;}\n@media (max-width:600px){.hb-video-container{max-width:100%;max-height:95vh;padding:6px}.hb-video-close{top:10px;right:10px;font-size:18px;width:36px;height:36px}.hb-video-unmute{top:10px;right:52px;font-size:16px;width:36px;height:36px}}\n';
     document.head.appendChild(style);
   }
 
@@ -20,6 +20,8 @@
     if(poster) video.poster = poster;
     video.controls = true;
     video.autoplay = true;
+    // Start muted to satisfy modern autoplay policies; user can unmute with the button
+    video.muted = true;
     try{ video.volume = 0.5; }catch(e){}
     video.setAttribute('playsinline','');
 
@@ -28,21 +30,35 @@
     close.setAttribute('aria-label','Close video');
     close.innerHTML = '&times;';
 
-    function removeOverlay(){ try{ video.pause(); }catch(e){} if(document.body.contains(overlay)) document.body.removeChild(overlay); if(document.body.contains(close)) document.body.removeChild(close); window.removeEventListener('keyup',onEsc); }
+    // Create an unmute button so users can enable audio (explicit user gesture)
+    var unmute = document.createElement('button');
+    unmute.className = 'hb-video-unmute';
+    unmute.setAttribute('aria-label','Unmute video');
+    unmute.innerHTML = '🔊';
+    unmute.style.display = 'flex';
+
+    function removeOverlay(){ try{ video.pause(); }catch(e){} if(document.body.contains(overlay)) document.body.removeChild(overlay); if(document.body.contains(close)) document.body.removeChild(close); if(document.body.contains(unmute)) document.body.removeChild(unmute); window.removeEventListener('keyup',onEsc); }
     function onEsc(e){ if(e.key==='Escape'){ removeOverlay(); }}
 
     close.addEventListener('click', removeOverlay);
     overlay.addEventListener('click',function(e){ if(e.target===overlay){ removeOverlay(); }});
     window.addEventListener('keyup', onEsc);
 
+    // Unmute action: explicit user gesture to enable audio
+    unmute.addEventListener('click', function(e){ e.stopPropagation(); try{ video.muted = false; video.volume = 0.5; }catch(err){} unmute.style.display = 'none'; video.focus(); });
+
     container.appendChild(video);
     overlay.appendChild(container);
     document.body.appendChild(overlay);
     document.body.appendChild(close);
+    document.body.appendChild(unmute);
 
     // ensure volume is set when playback begins (covers autoplay restrictions)
     var setVol = function(){ try{ video.volume = 0.5; }catch(e){} video.removeEventListener('play', setVol); };
     video.addEventListener('play', setVol);
+
+    // hide unmute button if video plays with audio already enabled
+    video.addEventListener('play', function(){ if(!video.muted){ try{ unmute.style.display = 'none'; }catch(e){} }});
 
     // try to size video reasonably for very wide videos
     video.addEventListener('loadedmetadata', function(){
