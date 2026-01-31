@@ -54,13 +54,40 @@
     return {overlay:overlay,video:video,close:close};
   }
 
-  document.addEventListener('click',function(e){
+  document.addEventListener('click', async function(e){
     var el = e.target.closest && e.target.closest('a[data-video]');
     if(!el) return;
     e.preventDefault();
     var src = el.getAttribute('href') || el.getAttribute('data-video');
     if(!src) return;
     var poster = el.getAttribute('data-poster') || (el.querySelector && el.querySelector('img') && el.querySelector('img').src);
+
+    // Debug: log requested video and verify availability via a HEAD request
+    console.debug('[videoOverlay] requested video:', src);
+    try{
+      var resp = await fetch(src, { method: 'HEAD' });
+      if(!resp.ok){
+        console.error('[videoOverlay] video not available:', src, resp.status);
+        // show a brief error overlay so user sees feedback
+        var err = document.createElement('div');
+        err.className = 'hb-video-overlay';
+        var msg = document.createElement('div');
+        msg.style.color = '#fff';
+        msg.style.maxWidth = '600px';
+        msg.style.padding = '20px';
+        msg.style.textAlign = 'center';
+        msg.innerHTML = '<p>Sorry, this video could not be loaded (HTTP '+resp.status+').</p>';
+        err.appendChild(msg);
+        document.body.appendChild(err);
+        setTimeout(function(){ try{ if(document.body.contains(err)) document.body.removeChild(err); }catch(e){} },4500);
+        return;
+      }
+    }catch(err){
+      console.error('[videoOverlay] fetch failed for video:', src, err);
+      alert('Video appears to be unavailable. Check the browser console for details.');
+      return;
+    }
+
     createOverlay(src,poster);
   },false);
 })();
