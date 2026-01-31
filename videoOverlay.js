@@ -62,32 +62,55 @@
     if(!src) return;
     var poster = el.getAttribute('data-poster') || (el.querySelector && el.querySelector('img') && el.querySelector('img').src);
 
-    // Debug: log requested video and verify availability via a HEAD request
     console.debug('[videoOverlay] requested video:', src);
+
+    // Create overlay immediately (keeps play() inside the original user gesture)
+    var parts = createOverlay(src, poster);
+    var video = parts.video;
+
+    // try to play immediately; if blocked the user still has controls
+    try {
+      var playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(function(err){
+          console.warn('[videoOverlay] autoplay blocked or play failed:', err);
+        });
+      }
+    } catch(err){
+      console.warn('[videoOverlay] video.play() threw:', err);
+    }
+
+    // Perform HEAD check in background; don't abort overlay on failure, just show a brief notice
     try{
       var resp = await fetch(src, { method: 'HEAD' });
       if(!resp.ok){
         console.error('[videoOverlay] video not available:', src, resp.status);
-        // show a brief error overlay so user sees feedback
-        var err = document.createElement('div');
-        err.className = 'hb-video-overlay';
+        var notice = document.createElement('div');
+        notice.className = 'hb-video-overlay';
         var msg = document.createElement('div');
         msg.style.color = '#fff';
         msg.style.maxWidth = '600px';
         msg.style.padding = '20px';
         msg.style.textAlign = 'center';
-        msg.innerHTML = '<p>Sorry, this video could not be loaded (HTTP '+resp.status+').</p>';
-        err.appendChild(msg);
-        document.body.appendChild(err);
-        setTimeout(function(){ try{ if(document.body.contains(err)) document.body.removeChild(err); }catch(e){} },4500);
-        return;
+        msg.innerHTML = '<p>Video could not be verified (HTTP '+resp.status+'). You may still try to play it.</p>';
+        notice.appendChild(msg);
+        document.body.appendChild(notice);
+        setTimeout(function(){ try{ if(document.body.contains(notice)) document.body.removeChild(notice); }catch(e){} },4500);
       }
     }catch(err){
-      console.error('[videoOverlay] fetch failed for video:', src, err);
-      alert('Video appears to be unavailable. Check the browser console for details.');
-      return;
+      console.error('[videoOverlay] fetchHEAD failed for video:', src, err);
+      var notice = document.createElement('div');
+      notice.className = 'hb-video-overlay';
+      var msg = document.createElement('div');
+      msg.style.color = '#fff';
+      msg.style.maxWidth = '600px';
+      msg.style.padding = '20px';
+      msg.style.textAlign = 'center';
+      msg.innerHTML = '<p>Could not verify video availability. Check the browser console for details.</p>';
+      notice.appendChild(msg);
+      document.body.appendChild(notice);
+      setTimeout(function(){ try{ if(document.body.contains(notice)) document.body.removeChild(notice); }catch(e){} },4500);
     }
 
-    createOverlay(src,poster);
   },false);
 })();
