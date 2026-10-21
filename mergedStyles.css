@@ -282,10 +282,11 @@ footer input[type="submit"]:hover {
     width: 100%; /* Optional: Ensures container takes full width */
   }
 
-.iframe-container {
+iframe {
     position: relative;
-    width: 300px;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-    height: 0;
-    overflow: hidden;
+    width: 96%;
+    height: 400px; /* Adjust height as needed */
+    border: 10px solid var(--border); /* Optional: Adds a border around the iframe */
+    border-radius: 8px; /* Optional: Adds rounded corners */
+    margin-top: 20px; /* Optional: Adds space above the iframe */
 }
