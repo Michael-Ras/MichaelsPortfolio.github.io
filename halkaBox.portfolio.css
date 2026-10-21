@@ -1,0 +1,46 @@
+.hb-wrapper .hb-main-container,
+.hb-wrapper.hb-dark-theme .hb-main-container {
+    background-color: rgba(16, 16, 16, 0.96);
+}
+
+.hb-wrapper .hb-image-container div.hb-image-div img {
+    width: auto;
+    height: auto;
+    margin: 0;
+    border-radius: 4px;
+}
+
+.hb-wrapper .hb-image-container div p.hb-caption-white,
+.hb-wrapper .hb-image-container div p.hb-caption-black {
+    background-color: rgba(26, 25, 24, 0.94);
+    border-top: 1px solid var(--border, #48423e);
+    color: var(--text, #f0ece8);
+    font-family: Arial, sans-serif;
+}
+
+.hb-wrapper .hb-main-container p.hb-counter,
+.hb-wrapper.hb-dark-theme .hb-main-container p.hb-counter {
+    background-color: rgba(26, 25, 24, 0.9);
+    color: var(--muted, #aaa39d);
+    font-family: Arial, sans-serif;
+}
+
+.hb-wrapper .hb-close svg,
+.hb-wrapper .hb-left svg,
+.hb-wrapper .hb-right svg,
+.hb-wrapper.hb-dark-theme .hb-close svg,
+.hb-wrapper.hb-dark-theme .hb-left svg,
+.hb-wrapper.hb-dark-theme .hb-right svg {
+    fill: var(--accent, #e66a4b);
+}
+
+@media only screen and (max-width: 960px) {
+    .hb-wrapper .hb-close-icon-container,
+    .hb-wrapper .hb-left-icon-container,
+    .hb-wrapper .hb-right-icon-container,
+    .hb-wrapper.hb-dark-theme .hb-close-icon-container,
+    .hb-wrapper.hb-dark-theme .hb-left-icon-container,
+    .hb-wrapper.hb-dark-theme .hb-right-icon-container {
+        background-color: rgba(26, 25, 24, 0.9);
+    }
+}
