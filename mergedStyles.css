@@ -101,6 +101,11 @@ div {
 nav {
     text-align: center;
     margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    padding: 10px;
+    z-index: 1000;
 }
 
 nav a {
